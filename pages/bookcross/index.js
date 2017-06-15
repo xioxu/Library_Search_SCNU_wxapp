@@ -62,7 +62,7 @@ Page({
 	/* 联系我们 */
 	bindtap: function (e) {
 		wx.makePhoneCall({
-			phoneNumber: '15521303970' //仅为示例，并非真实的电话号码
+			phoneNumber: '123123123' //仅为示例，并非真实的电话号码
 			})
 	}
 })

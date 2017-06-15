@@ -19,7 +19,7 @@ Page({
         winHeight: 0,
         currentTab: 0,
         button_findBook_bcolor:"#85dcec",
-        button_findBook_context:"馆员代找图书"
+        button_findBook_context:"借阅本书"
     },
 
     onPullDownRefresh: function () {
@@ -52,7 +52,7 @@ Page({
     /* 向服务器发送代找图书信息 */
     findBookRequest: function (book_name, book_author, books, code) {
         var that = this;
-        that.setData({ button_findBook_bcolor: "#ffffff", button_findBook_context: "已请求馆员代找本书" });
+        that.setData({ button_findBook_bcolor: "#ffffff", button_findBook_context: "已请求借阅" });
         wx.request({
           url: 'https://www.huxiaowu0504.cn/Handler_find_book.ashx',
           method: "POST",
@@ -64,7 +64,7 @@ Page({
           },
           success: function (res) {
             wx.showToast({
-              title: '已成功请求馆员代找本书',
+              title: '已借阅成功',
               icon: 'loading',
               duration: 1500
             });
@@ -143,7 +143,7 @@ Page({
       for (var i = 0; i < finds.length; i++) {
         if (finds[i].marc_no === marc_no) {
           var that = this;
-          that.setData({ button_findBook_bcolor: "#ffffff", button_findBook_context: "已请求馆员代找本书" });
+          that.setData({ button_findBook_bcolor: "#ffffff", button_findBook_context: "已请求借阅" });
           return true;
         }
       };
@@ -161,16 +161,12 @@ Page({
             'Content-Type': 'application/x-www-form-urlencoded'
         }
         that.setData({
-            marc_no: options.marc_no,
+            bookid: options.bookid,
             is_faved: that.searchFav(options.marc_no, favs),
             is_toBeFound: that.searchFind(options.marc_no, finds),
-            school: options.school,
-            ctrl_no: options.ctrl_no
         });
         var data = {
-            marc_no: options.marc_no,
-            school: that.data.school,
-            ctrl_no: options.ctrl_no
+          id: options.bookid
         }
         setTimeout(function () {
             wx.request({
@@ -181,10 +177,10 @@ Page({
                 success: function (res) {
                     that.setData({
                         books: res.data.books,
-                        code: res.data.code,
-                        book_author: res.data.book_author,
-                        book_name: res.data.book_name,
-                        description: res.data.description, 
+                        code: res.data.isbn,
+                        book_author: res.data.author,
+                        book_name: res.data.bookname,
+                        summary: res.data.recommend, 
                         mounted: true
                     });
                 }

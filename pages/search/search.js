@@ -125,6 +125,29 @@ Page({
         })
     },
 
+    initLibrary:function(){
+      this.data.province_index = 0;
+      this.data.school_index = 0;
+      wx.setStorageSync('school', 'cross');
+      wx.setStorageSync('school_name', 'CROSS书屋');
+      wx.setStorageSync('school_index', this.data.school_index);
+      wx.setStorageSync('province_index', this.data.province_index);
+      this.setData({
+        choose_school: false,
+        has_school: true,
+        school: wx.getStorageSync('school'),
+        school_name: wx.getStorageSync('school_name')
+      });
+
+      wx.setNavigationBarTitle({ title: this.data.school_name + "查询" });
+      this.setData({
+        book_name: "",
+        book_count: -1,
+        is_alot: false,
+        button_bcolor: "#b2b2b2"
+      });
+    },
+
     /* 更换学校视图层提交后，数据改变及缓存 */
     confirmChooseSchool: function () {
         wx.setStorageSync('school', app.codes[this.data.schools[this.data.school_index]]);
@@ -174,6 +197,7 @@ Page({
     /* 页面加载 */
     onLoad: function () {
         var that = this;
+        that.initLibrary();
         wx.getStorage({
             key: 'school',
             success: function (res) {

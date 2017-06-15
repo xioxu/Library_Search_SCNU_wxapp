@@ -33,8 +33,7 @@
 <view wx:if='{{!choose_school}}' class="container">
   <view class="help-text">
     <text>请输入图书名</text>
-    <text class="right green_link" bindtap="changeSchoolRequest">更换学校</text>
-    <text class="right">{{school_name}}</text>
+   
   </view>
   <view class="input-cell">
     <view class="input-cell-hd">
@@ -52,7 +51,7 @@
     </view>
     <view wx:if="{{is_alot}}">
       <view class="help-text">
-        <text>关键词搜索结果 {{ book_count }} 个，仅显示前200条。</text>
+        <text>关键词搜索结果 {{ book_count }} 个，仅显示前10条。</text>
       </view>
     </view>
     <view wx:elif="{{book_count > 0}}">
@@ -65,12 +64,12 @@
         <block wx:for="{{books}}" wx:for-item="book" wx:key="marc_no">
           <view class="book-link">
             <navigator class="book-navigator" open-type="navigate"
-                       url="../detail/detail?marc_no={{book.marc_no}}&school={{school}}&ctrl_no={{book.ctrl_no}}"
+                       url="../detail/detail?bookid={{book._id}}"
                        hover-class="navigator-hover">
-              {{book.title}}
+              {{book.bookname}}
               <view class="book_description">
-              <text class="book_description_author">{{book.description.author}}</text>
-              <text class="book_description_press">{{book.description.press}}</text>
+              <text class="book_description_author">{{book.author}}</text>
+              <text class="book_description_press">{{book.recommend}}</text>
             </view>
           </navigator>
           <view class="link-icon"></view>

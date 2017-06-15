@@ -21,8 +21,8 @@
 		</view>
 	</view>
 
-	<template is="button_findBook" data="{{bindtapaction:'findBook', bcolor:button_findBook_bcolor, loading: loading, context:button_findBook_context}}"  />
 
+	<template is="button_findBook" data="{{bindtapaction:'findBook', bcolor:button_findBook_bcolor, loading: loading, context:button_findBook_context}}"  /> 
 	<view class="swiper-tab">
 		<view class="swiper-tab-list {{currentTab==0?'on':''}}" data-current="0" bindtap="swichNav">馆藏详情</view>
 		<view class="swiper-tab-list {{currentTab==1?'on':''}}" data-current="1" bindtap="swichNav">图书详情</view>
@@ -55,12 +55,12 @@
 		</swiper-item>
 		<swiper-item>
 			<scroll-view scroll-y="true" style="height: {{ scroll_height }}px;">
-				<view class="detail-image">
-					<image src="{{description.image_url}}"></image>
+				<view wx:if="{{image_url}}" class="detail-image">
+					<image src="{{image_url}}"></image>
 				</view>
 				<view class="detail-summary">
 					<text class="detail-summary title">简介</text>
-					<text class="detail-summary content">{{description.summary}}</text>
+					<text class="detail-summary content">{{summary}}</text>
 				</view>
 			</scroll-view>
 		</swiper-item>

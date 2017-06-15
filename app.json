@@ -33,7 +33,7 @@
         "pagePath": "pages/bookcross/index",
         "iconPath": "src/img/bookcross.png",
         "selectedIconPath": "src/img/bookcrossLight.png",
-        "text": "漂流角"
+        "text": "我的借阅"
       },
       {
         "pagePath": "pages/user/index",
